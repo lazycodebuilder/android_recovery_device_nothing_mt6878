@@ -1,0 +1,20 @@
+# Fstab (Postinstall Prefix)
+ro.postinstall.fstab.prefix=/system
+
+# USB Configuration
+ro.sys.usb.storage.type=mtp
+
+# Cryptography Settings
+ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.support_metadata_encrypt=true
+
+# Gatekeeper HAL
+ro.hardware.gatekeeper=trustonic
+ro.hardware.kmsetkey=trustonic
+
+# TEE (Trusted Execution Environment)
+ro.vendor.mtk_tee_gp_support=1
+ro.vendor.mtk_trustonic_tee_support=1
+
+# Keymaster HAL
+keymaster_ver=4.1

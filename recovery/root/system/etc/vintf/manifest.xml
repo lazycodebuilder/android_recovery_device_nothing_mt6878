@@ -1,0 +1,45 @@
+<manifest version="2.0" type="framework">
+    <hal>
+        <name>android.hidl.manager</name>
+        <transport>hwbinder</transport>
+        <version>1.2</version>
+        <interface>
+            <name>IServiceManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>android.hidl.token</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ITokenManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal>
+        <name>android.hidl.allocator</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IAllocator</name>
+            <instance>ashmem</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>android.system.keystore2</name>
+        <version>3</version>
+        <interface>
+            <name>IKeystoreService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <system-sdk>
+        <version>29</version>
+        <version>30</version>
+        <version>31</version>
+        <version>32</version>
+        <version>33</version>
+        <version>34</version>
+    </system-sdk>
+</manifest>

@@ -1,0 +1,53 @@
+# ========================================
+# Copyright & Licensing
+# ========================================
+# Copyright (C) 2024-2025 The TeamWin Recovery Project
+# SPDX-License-Identifier: Apache-2.0
+#
+# TWRP Device Config for MT6878
+# Maintainer: LazymeaoProjects
+# Date: 2025-05-XX
+#
+# This USB configuration script handles any missing settings, 
+# relying on the system's initialization (system/etc/init/hw/init.rc) for basic setup.
+#
+
+on early-init
+    setprop sys.usb.configfs 1
+
+on init
+    setprop sys.usb.controller "11201000.usb0"
+    setprop vendor.usb.acm_cnt 0
+    setprop vendor.usb.acm_port0 ""
+    setprop vendor.usb.acm_port1 ""
+    setprop vendor.usb.acm_enable 0
+
+on fs && property:sys.usb.configfs=1
+    mkdir /config/usb_gadget/g1/functions/ffs.sideload
+    mkdir /config/usb_gadget/g1/functions/mtp.gs0
+    mkdir /dev/usb-ffs 0770 shell system
+
+on fs
+    # for usb otg sdcard hot plug detection
+    write /sys/module/block/parameters/events_dfl_poll_msecs 1000
+
+on property:ro.boot.usbcontroller=*
+    setprop sys.usb.controller ${ro.boot.usbcontroller}
+
+on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
+    start adbd
+
+on property:sys.usb.config=none && property:sys.usb.configfs=1
+    rm /config/usb_gadget/g1/configs/b.1/f2
+
+on property:sys.usb.config=sideload && property:sys.usb.ffs.ready=1 && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "sideload"
+    symlink /config/usb_gadget/g1/functions/ffs.sideload /config/usb_gadget/g1/configs/b.1/f1
+
+on property:sys.usb.config=mtp,adb && property:sys.usb.ffs.ready=1 && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/idProduct 0x201D
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp_adb"
+    symlink /config/usb_gadget/g1/functions/mtp.gs0 /config/usb_gadget/g1/configs/b.1/f1
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
+    write /config/usb_gadget/g1/UDC ${sys.usb.controller}
+    setprop sys.usb.state ${sys.usb.config}
