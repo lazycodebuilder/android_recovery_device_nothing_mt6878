@@ -36,6 +36,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 
 # ========================================
+# APEX Module Configuration
+# ========================================
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
+# ========================================
 # GSI & Developer-Specific Configuration
 # ========================================
 
