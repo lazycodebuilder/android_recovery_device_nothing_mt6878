@@ -47,6 +47,10 @@ TARGET_BOARD_PLATFORM := mt6878
 TARGET_BOOTLOADER_BOARD_NAME := mt6878
 TARGET_NO_BOOTLOADER := true
 
+BOARD_HAS_MTK_HARDWARE := true
+BOARD_USES_MTK_HARDWARE := true
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+
 # ========================================
 # Kernel & DTBO Config
 # ========================================
