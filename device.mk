@@ -99,13 +99,6 @@ PRODUCT_PACKAGES += \
     android.system.keystore2
 
 # ========================================
-# MTK-specific Utilities
-# ========================================
-PRODUCT_PACKAGES += \
-    mtk_plpath_utils \
-    mtk_plpath_utils.recovery
-
-# ========================================
 # Update Engine (for A/B and sideload)
 # ========================================
 PRODUCT_PACKAGES += \
