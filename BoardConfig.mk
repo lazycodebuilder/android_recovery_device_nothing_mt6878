@@ -153,9 +153,16 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 # ========================================
 # Kernel Modules (Optional)
 # ========================================
+RECOVERY_VENDOR_KERNEL_PATH := $(DEVICE_PATH)/prebuilt/kernel_modules/vendor_boot
+# Enable loading of vendor boot kernel modules
 TW_LOAD_VENDOR_BOOT_MODULES := true
-#TW_LOAD_VENDOR_MODULES := ...
-#TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
+TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
+
+# Read module list with whitespace handling and error redirection
+RECOVERY_VENDOR_MODULE_NAMES := $(shell sed -e 's/^[ \t]*//;s/[ \t]*$$//' -e '/^$$/d' -e '/^#/d' $(RECOVERY_VENDOR_KERNEL_PATH)/modules.load 2>/dev/null)
+
+# Build module list with existence check
+TW_LOAD_VENDOR_MODULES := $(foreach mod,$(RECOVERY_VENDOR_MODULE_NAMES),$(wildcard $(RECOVERY_VENDOR_KERNEL_PATH)/$(mod)))
 
 # ========================================
 # AVB (Android Verified Boot)

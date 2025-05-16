@@ -123,3 +123,8 @@ PRODUCT_PACKAGES_DEBUG += \
 # oem otacerts key
 # ========================================
 PRODUCT_EXTRA_RECOVERY_KEYS += $(DEVICE_PATH)/security/nothingreleasekey
+
+# ========================================
+# Kernel Modules for Recovery
+# ========================================
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(DEVICE_PATH)/prebuilt/kernel_modules/vendor_boot,$(TARGET_COPY_OUT_RECOVERY)/root/lib/modules/)
