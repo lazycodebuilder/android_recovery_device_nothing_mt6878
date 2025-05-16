@@ -24,6 +24,7 @@ TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_VARIANT := generic
 TARGET_CPU_VARIANT_RUNTIME := cortex-a55
+
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
 
@@ -34,11 +35,6 @@ ENABLE_SCHEDBOOST := true
 # OTA Assert Devices
 # ========================================
 TARGET_OTA_ASSERT_DEVICE := Tetris,tetris,A015,mt6878
-
-# ========================================
-# Treble/VNDK
-# ========================================
-BOARD_VNDK_VERSION := current
 
 # ========================================
 # Platform & Bootloader
@@ -61,28 +57,18 @@ TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_PAGE_SIZE := 4096
 BOARD_KERNEL_BASE := 0x3fff8000
-BOARD_KERNEL_OFFSET := 0x00008000
 BOARD_KERNEL_TAGS_OFFSET := 0x07c88000
-BOARD_TAGS_OFFSET := 0x07c88000
 BOARD_RAMDISK_OFFSET := 0x26f08000
-BOARD_DTB_OFFSET := 0x07c88000
-BOARD_DTB_SIZE := 338406
-BOARD_VENDOR_BASE := 0x3fff8000
 BOARD_VENDOR_CMDLINE := bootopt=64S3,32N2,64N2
-
-#BOARD_DTB_SIZE := 11534336         # 11MB
-#BOARD_DTB_OFFSET := 0x358D040      # Corrected offset in hex
 
 # mkbootimg configuration
 BOARD_MKBOOTIMG_ARGS += \
     --dtb $(TARGET_PREBUILT_DTB) \
     --vendor_cmdline $(BOARD_VENDOR_CMDLINE) \
     --pagesize $(BOARD_PAGE_SIZE) --board "" \
-    --kernel_offset $(BOARD_KERNEL_OFFSET) \
     --ramdisk_offset $(BOARD_RAMDISK_OFFSET) \
-    --tags_offset $(BOARD_TAGS_OFFSET) \
-    --header_version $(BOARD_BOOT_HEADER_VERSION) \
-    --dtb_offset $(BOARD_DTB_OFFSET)
+    --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) \
+    --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 TARGET_NO_RECOVERY := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
@@ -149,7 +135,6 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_USE_FSCRYPT_POLICY := 2
-TW_FORCE_KEYMASTER_VER := true
 
 # ========================================
 # Anti-Rollback Bypass

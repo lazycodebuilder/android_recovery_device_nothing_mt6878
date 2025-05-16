@@ -96,14 +96,7 @@ PRODUCT_PACKAGES += \
 # Keymaster & Keystore Support
 # ========================================
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.1 \
     android.system.keystore2
-
-TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.1
-
-TARGET_RECOVERY_DEVICE_MODULES += \
-    android.hardware.keymaster@4.1
 
 # ========================================
 # MTK-specific Utilities
@@ -111,14 +104,6 @@ TARGET_RECOVERY_DEVICE_MODULES += \
 PRODUCT_PACKAGES += \
     mtk_plpath_utils \
     mtk_plpath_utils.recovery
-
-# ========================================
-# Android Security HALs
-# ========================================
-PRODUCT_PACKAGES += \
-    android.hardware.security.keymint \
-    android.hardware.security.secureclock \
-    android.hardware.security.sharedsecret
 
 # ========================================
 # Update Engine (for A/B and sideload)

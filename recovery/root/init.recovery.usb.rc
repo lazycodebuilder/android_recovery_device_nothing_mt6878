@@ -17,10 +17,6 @@ on early-init
 
 on init
     setprop sys.usb.controller "11201000.usb0"
-    setprop vendor.usb.acm_cnt 0
-    setprop vendor.usb.acm_port0 ""
-    setprop vendor.usb.acm_port1 ""
-    setprop vendor.usb.acm_enable 0
 
 on fs && property:sys.usb.configfs=1
     mkdir /config/usb_gadget/g1/functions/ffs.sideload

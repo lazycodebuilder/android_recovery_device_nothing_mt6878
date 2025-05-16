@@ -26,14 +26,6 @@
             <instance>ashmem</instance>
         </interface>
     </hal>
-    <hal format="aidl">
-        <name>android.system.keystore2</name>
-        <version>3</version>
-        <interface>
-            <name>IKeystoreService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <system-sdk>
         <version>29</version>
         <version>30</version>
