@@ -4,7 +4,7 @@
 # Copyright (C) 2024-2025 The TeamWin Recovery Project
 # SPDX-License-Identifier: Apache-2.0
 #
-# TWRP Device Config for MT6878
+# TWRP Device Config for Tetris
 # Maintainer: LazymeaoProjects
 # Date: 2025-05-XX
 #
@@ -17,8 +17,8 @@ LOCAL_PATH := $(call my-dir)
 # ========================================
 # Device-Specific Configurations
 # ========================================
-# Only apply configurations for mt6878 device
-ifeq ($(TARGET_DEVICE),mt6878)
+# Only apply configurations for tetris device
+ifeq ($(TARGET_DEVICE),tetris)
     # Include all subdirectory makefiles under this directory
     include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif

@@ -4,7 +4,7 @@
 # Copyright (C) 2024-2025 The TeamWin Recovery Project
 # SPDX-License-Identifier: Apache-2.0
 #
-# TWRP Device Config for MT6878
+# TWRP Device Config for tetris
 # Maintainer: LazymeaoProjects
 # Date: 2025-05-XX
 #
