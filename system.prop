@@ -4,6 +4,9 @@ ro.postinstall.fstab.prefix=/system
 # USB Configuration
 ro.sys.usb.storage.type=mtp
 
+ro.boot.product.vendor.sku=mt6878
+ro.vendor.mediatek.platform=MT6878
+
 # Cryptography Settings
 ro.crypto.volume.filenames_mode=aes-256-cts
 ro.crypto.support_metadata_encrypt=true

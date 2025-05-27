@@ -42,6 +42,7 @@ TARGET_OTA_ASSERT_DEVICE := Tetris,tetris,A015,mt6878
 TARGET_BOARD_PLATFORM := mt6878
 TARGET_BOOTLOADER_BOARD_NAME := mt6878
 TARGET_NO_BOOTLOADER := true
+TARGET_USES_UEFI := true
 
 BOARD_HAS_MTK_HARDWARE := true
 BOARD_USES_MTK_HARDWARE := true
@@ -109,6 +110,8 @@ TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
+BOARD_USES_VENDOR_DLKMIMAGE := true
+
 # ========================================
 # Dynamic Partitions
 # ========================================
@@ -139,11 +142,14 @@ TW_USE_FSCRYPT_POLICY := 2
 # ========================================
 # Anti-Rollback Bypass
 # ========================================
-PLATFORM_SECURITY_PATCH := 2127-12-31
+PLATFORM_SECURITY_PATCH := 2099-12-31
 BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-PLATFORM_VERSION := 99.87.36
+PLATFORM_VERSION := 16.1.0
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+
+# Enables proper handling of /data/media
+RECOVERY_SDCARD_ON_DATA := true
 
 # ========================================
 # Wipe Handling / Misc
@@ -168,6 +174,7 @@ TW_LOAD_VENDOR_MODULES := $(foreach mod,$(RECOVERY_VENDOR_MODULE_NAMES),$(wildca
 # AVB (Android Verified Boot)
 # ========================================
 BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
 
 # Enable AVB for the vendor_boot image
 BOARD_AVB_VENDOR_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
@@ -175,18 +182,11 @@ BOARD_AVB_VENDOR_BOOT_ALGORITHM := SHA256_RSA4096
 BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX_LOCATION := 1
 
-# Enable AVB for the vbmeta_system image
-BOARD_AVB_VBMETA_SYSTEM := system system_ext product
-BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 2
-
 # ========================================
 # FSTab
 # ========================================
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-#TW_SKIP_ADDITIONAL_FSTAB := true
+TW_SKIP_ADDITIONAL_FSTAB := true
 
 # ========================================
 # System Properties
@@ -207,7 +207,7 @@ TARGET_RECOVERY_DEVICE_MODULES := libinit_mt6878
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 
 # Brightness flags
-TW_BRIGHTNESS_PATH := /sys/class/backlight/panel0-backlight/brightness
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 4095
 TW_DEFAULT_BRIGHTNESS := 140
 TW_FRAMERATE := 60
@@ -246,9 +246,11 @@ TW_INCLUDE_FASTBOOTD := true
 # Status Bar Customization
 # ========================================
 TW_STATUS_ICONS_ALIGN := center
-TW_CUSTOM_CLOCK_POS := "290"
+#TW_CUSTOM_CLOCK_POS := "290"
 #TW_CUSTOM_CPU_POS := "340"
 #TW_CUSTOM_BATTERY_POS := "790"
+
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
 
 # ========================================
 # Debug & Logging

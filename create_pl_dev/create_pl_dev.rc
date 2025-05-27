@@ -10,6 +10,16 @@ on post-fs
     symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/bootdevice/by-name/preloader_raw_a
     symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/bootdevice/by-name/preloader_raw_b
 
+    # FSTAB_RAW2(lk2,bootloader2) of fstab.in.emmc, but without bootloader2 mount point
+    symlink /dev/block/by-name/lk1 /dev/block/by-name/bootloader1
+    symlink /dev/block/by-name/lk2 /dev/block/by-name/bootloader2
+
+    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/soc/112b0000.ufshci/by-name/preloader_raw_a
+    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/soc/112b0000.ufshci/by-name/preloader_raw_b
+
+    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/112b0000.ufshci/by-name/preloader_raw_a
+    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/112b0000.ufshci/by-name/preloader_raw_b
+
     symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/11270000.ufshci/by-name/preloader_raw_a
     symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/11270000.ufshci/by-name/preloader_raw_b
 

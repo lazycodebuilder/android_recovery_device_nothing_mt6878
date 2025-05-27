@@ -1,3 +1,4 @@
+import init.mtkgki.rc
 import init.recovery.mtk_decrypt.rc
 
 # Filesystem mounting
@@ -8,4 +9,4 @@ on post-fs
     start boot-hal-1-2
 
 on boot
-    start health-hal-2-1
+    start health-default

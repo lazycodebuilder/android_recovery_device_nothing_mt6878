@@ -1,0 +1,113 @@
+# Hardware info configure for Shadow HwInfoQcomQ5003
+
+## Rules Description:
+## '*' is the separator between key and value(s).
+## '|' is the separator between multiple values.
+### Format for a single value : key* value
+### Format for multiple values: key* value1 | value2 | ...
+### NOTE:
+### 1. EMPTY or NULL value is all right;
+### 2. a space is suggested before and after the separator '|'.
+
+
+###############################################################################################################################
+
+###Before pushing the file, please change the file name to fachwinfocfg，then push file to /vendor/etc.
+
+###############################################################################################################################
+The suffix with values indicates that the corresponding node value should be filled in for the node
+cam_back_lens_mfr*/sys/ontim_bootinfo/cam_back_lens_mfr
+cam_back_lens_mfr_values*imx882_mipi_raw,imx882txd_mipi_raw 
+cam_front_lens_mfr*/sys/ontim_bootinfo/cam_front_lens_mfr
+cam_front_lens_mfr_values*gc16b3c_mipi_raw,gc16b3ctxd_mipi_raw 
+cam_depth_lens_mfr*/sys/ontim_bootinfo/cam_depth_lens_mfr
+cam_depth_lens_mfr_values*sc202cs_mipi_raw,sc202cssj_mipi_raw   
+
+lcd_mfr*/sys/ontim_bootinfo/lcd_info
+lcd_mfr_values*mdss_dsi_tcl_ft8006s_fhd_vid,mdss_dsi_lcetron_icnl9911c_fhd_vid
+
+speaker_mfr*/sys/bus/i2c/drivers/aw882xx_smartpa/6-0034/name
+speaker_mfr_values*aw882xx_smartpa
+
+###############################################################################################################################
+acc_sensor_mfr*
+adb_sn*/config/usb_gadget/g1/strings/0x409/serialnumber
+ambient_light_mfr*/sys/class/sprd_sensorhub/sensor_hub/light_info
+baro_sensor_mfr*
+battery_capacity*/sys/class/power_supply/battery/capacity
+battery_mfr*/sys/ontim_bootinfo/bat_info
+battery2_mfr*/sys/ontim_bootinfo/bat_info
+battery_voltage*/sys/class/power_supply/battery/voltage_now
+battery_control_node*/proc/mtk_battery_cmd/current_cmd
+board_id*/sys/hwinfo/board_id
+cam_back_lens_efuse*/sys/ontim_bootinfo/cam_back_lens_efuse
+cam_depth_lens_efuse*/sys/ontim_bootinfo/cam_depth_lens_efuse
+cam_front_lens_efuse*/sys/ontim_bootinfo/cam_front_lens_efuse
+cam_iris_lens_efuse*/data/vendor/cameraserver/hwinfo/cam_iris_lens_efuse
+cam_iris_lens_mfr*/data/vendor/cameraserver/hwinfo/cam_iris_lens_mfr
+cam_iris_lens_otp_status*/data/vendor/cameraserver/hwinfo/cam_iris_lens_otp_status
+cam_macro_lens_efuse*/data/vendor/cameraserver/hwinfo/cam_macro_lens_efuse
+cam_macro_lens_mfr*/data/vendor/cameraserver/hwinfo/cam_macro_lens_mfr
+cam_macro_lens_otp_status*/data/vendor/cameraserver/hwinfo/cam_macro_lens_otp_status
+cam_tele_lens_efuse*/data/vendor/cameraserver/hwinfo/cam_tele_lens_efuse
+cam_tele_lens_mfr*/data/vendor/cameraserver/hwinfo/cam_tele_lens_mfr
+cam_tele_lens_otp_status*/data/vendor/cameraserver/hwinfo/cam_tele_lens_otp_status
+cam_tof_lens_efuse*/data/vendor/cameraserver/hwinfo/cam_tof_lens_efuse
+cam_tof_lens_mfr*/data/vendor/cameraserver/hwinfo/cam_tof_lens_mfr
+cam_tof_lens_otp_status*/data/vendor/cameraserver/hwinfo/cam_tof_lens_otp_status
+cam_wide_angle_lens_efuse*/data/vendor/cameraserver/hwinfo/cam_wide_angle_lens_efuse
+cam_wide_angle_lens_mfr*/data/vendor/cameraserver/hwinfo/cam_wide_angle_lens_mfr
+cam_wide_angle_lens_otp_status*/data/vendor/cameraserver/hwinfo/cam_wide_angle_lens_otp_status
+cam_front_sn*sys/ontim_bootinfo/front_camera_msn
+cam_main_sn*sys/ontim_bootinfo/main_camera_msn
+cam_depth_sn*sys/ontim_bootinfo/depth_camera_msn
+cam_wide_sn*/sys/ontim_bootinfo/wide_camera_msn
+charger_ic_mfr*/sys/ontim_bootinfo/main_charger_info
+charger2_ic_mfr*/sys/ontim_bootinfo/slave_charger_info
+cpu_type*
+cpu_id*/sys/devices/soc0/serial_number
+factory_partition*/dev/block/by-name/proinfo
+fp_mfr*/sys/devices/virtual/misc/focaltech_fp/focaltech/focaltech_info | /sys/devices/platform/soc/soc:fingerprint_fpsensor/chipone/chipone_info
+geo_sensor_mfr*
+gyro_sensor_mfr*
+g_sensor_mfr*/sys/class/sprd_sensorhub/sensor_hub/acc_info
+hw_sku*/sys/hwinfo/hw_sku
+hw_version*/sys/hwinfo/hw_version
+lcd_mfr*/sys/ontim_bootinfo/lcd_info
+memory_capacity*/proc/mem_capacity
+memory_mfr*/sys/devices/platform/soc/112b0000.ufshci/string_descriptors/manufacturer_name
+proximity_mfr*/sys/class/sprd_sensorhub/sensor_hub/prox_info
+nfc_mfr*/sys/nfc/nfcvendor
+power_usb_type*/proc/charger/usb_real_type
+quick_charge_type*/proc/charger/usb_real_type
+receiver_cali_data*
+speaker_cali_data*
+speaker_mfr*/sys/bus/i2c/drivers/aw882xx_smartpa/6-0034/name
+speaker_num*
+sar_sensor_mfr*
+sar_cali_ch_value*/mnt/vendor/persist/sensors/registry/registry/icp201xx_0_platform.pressure.fac_cal.bias
+simcard_holder*/sys/ontim_bootinfo/hw_sd_tray
+storage_mfr*/sys/devices/platform/soc/112b0000.ufshci/string_descriptors/manufacturer_name
+storage_capacity*/sys/devices/platform/soc/112b0000.ufshci/capacity
+storage_sn*/sys/devices/platform/soc/112b0000.ufshci/string_descriptors/serial_number
+storage_life*/sys/devices/platform/soc/112b0000.ufshci/health_descriptor/eol_info
+storage_info*
+tp_mfr*/sys/ontim_bootinfo/tp_info
+tp_capacity*/proc/touchscreen/fts_test
+typec_mfr*/sys/ontim_bootinfo/typec_info
+type_cc_status*/proc/charger/typec_cc_orientation
+private_partition*/dev/block/by-name/private
+oemowninfo_partition*/dev/block/by-name/oemowninfo
+charge_ic_path*/sys/devices/platform/soc/1c40000.qcom,spmi/spmi-0/spmi0-02/1c40000.qcom,spmi:qcom,pm7250b@2:qcom,qpnp-smb5/chargers_control
+prox_cal_path*/mnt/vendor/persist/sensors/registry/registry/ltr569_0_platform.proximity.fac_cal
+prox_cal_path_2*/mnt/vendor/persist/sensors/registry/registry/sip3510_platform.prox.fac_cal
+light_cal_path*/mnt/vendor/persist/sensors/registry/registry/ltr569_0_platform.ambient.fac_cal
+light_cal_path_2*/mnt/vendor/persist/sensors/registry/registry/sip3510_platform.als.fac_cal
+barometer_cali_1*/mnt/vendor/persist/sensors/registry/registry/icp201xx_0_platform.pressure.fac_cal.bias
+barometer_cali_2*/mnt/vendor/persist/sensors/registry/registry/spl07_0_platform.pressure.fac_cal.bias
+cam_16_5_path*mnt/vendor/persist/camera/dualcam_cali.bin
+cam_16_8_path*mnt/vendor/persist/camera/dualcam_cali_16_8.bin
+vibrator_cali_path*/mnt/vendor/persist/haptic/cali_data
+vibrator_mfr*/sys/ontim_bootinfo/vibrator_info
+
+
