@@ -16,6 +16,9 @@
 # Enable dynamic partitions (required for most modern A/B devices)
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# A/B
+ENABLE_AB := true
+
 # Enable Virtual A/B OTA support (incremental, seamless updates)
 ENABLE_VIRTUAL_AB := true
 
@@ -61,12 +64,10 @@ PRODUCT_PACKAGES += \
 # ========================================
 # Android Version & VNDK Configuration
 # ========================================
+BOARD_SHIPPING_API_LEVEL := 34
 
-# Shipping API level (Android 12 = API 31)
-PRODUCT_SHIPPING_API_LEVEL := 31
-
-# Target VNDK version (must match system/libVNDK layout)
-PRODUCT_TARGET_VNDK_VERSION := 31
+# Shipping API level (Android 14 = API 34)
+PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
 # ========================================
 # Boot Control HAL (for A/B)
