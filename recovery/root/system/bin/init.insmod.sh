@@ -1,4 +1,4 @@
-#!/vendor/bin/sh
+#!/system/bin/sh
 
 ########################################################
 ### init.insmod.cfg format:                          ###
@@ -52,7 +52,7 @@ if is_recovery_mode; then
     MODULE_PATHS="/lib/modules /vendor_dlkm/lib/modules"
     log_info "Running in recovery mode"
 else
-    MODULE_PATHS="/system_dlkm/lib/modules /vendor_dlkm/lib/modules /system/lib/modules /vendor/lib/modules"
+    MODULE_PATHS="/system_dlkm/lib/modules /vendor_dlkm/lib/modules"
     log_info "Running in normal mode"
 fi
 
@@ -262,8 +262,8 @@ setup_module_partitions() {
     # Define partitions that might contain modules
     if is_recovery_mode; then
         # Recovery mode - minimal mounts
-        if mount_partition_safe "system" "/system" "ext4" "ro"; then
-            mounted_partitions="$mounted_partitions /system"
+        if mount_partition_safe "vendor_dlkm" "/vendor_dlkm" "ext4" "ro"; then
+            mounted_partitions="$mounted_partitions /vendor_dlkm"
         fi
     else
         # Normal mode - full module partition support

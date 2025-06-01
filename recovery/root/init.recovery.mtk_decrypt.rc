@@ -19,21 +19,43 @@ on init
     chmod 0664 /dev/ion
     chown system system /dev/ion
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
+    setprop crypto.ready 1
 
 # Normal mode, FBE
-on property:ro.crypto.type=file && property:ro.crypto.state=encrypted
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
     mkdir /data/vendor/mcRegistry 0775 system system
     install_keyring
-
-# Normal mode, FDE
-on property:vold.decrypt=trigger_restart_framework
-    mkdir /data/vendor/mcRegistry 0775 system system
 
 # We need vold early for metadata encryption
 on early-fs
     start vold
 
-service gatekeeper-default /system/bin/android.hardware.gatekeeper-service.trustonic
+on property:crypto.ready=1 && property:hwservicemanager.ready=true
+    start mcDriverDaemon
+
+on property:sys.listeners.registered=true
+    start keymint-trustonic
+
+on property:vendor.sys.listeners.registered=true
+    start keymint-trustonic
+
+on property:ro.crypto.type=block && property:ro.crypto.fs_crypto_blkdev=*
+    setprop crypto.ready 0
+    stop mcDriverDaemon
+    stop keymint-trustonic
+
+on property:vendor.sys.listeners.registered=true
+    start gatekeeper-trustonic
+    start tee-trustonic
+
+on property:twrp.all.users.decrypted=true
+    setprop crypto.ready 0
+    stop mcDriverDaemon
+    stop gatekeeper-trustonic
+    stop tee-trustonic
+    stop keymint-trustonic
+
+service gatekeeper-trustonic /system/bin/android.hardware.gatekeeper-service.trustonic
     interface android.hardware.gatekeeper@1.0::IGatekeeper default
     user root
     group root
@@ -48,41 +70,10 @@ service keymint-trustonic /system/bin/android.hardware.security.keymint@3.0-serv
     disabled
     seclabel u:r:recovery:s0
 
-service tee-1-1 /system/bin/vendor.trustonic.tee@1.1-service
+service tee-trustonic /system/bin/vendor.trustonic.tee@1.1-service
     user root
     group root
     disabled
     seclabel u:r:recovery:s0
 
-on property:vendor.sys.listener.registered=true
-    start mobicore
-    start gatekeeper-default
-    start keymint-trustonic
-    start tee-1-1
-   
-on property:hwservicemanager.ready=true
-    start mobicore
-    start keymint-trustonic
-    start gatekeeper-default
-    start tee-1-1
-
-# For META/FACTORY mode
-on property:ro.crypto.state=unsupported
-    mkdir /data/vendor/mcRegistry 0775 system system
-    stop mobicore
-    stop keymint-trustonic
-    stop gatekeeper-default
-    stop tee-1-1
-
-on property:ro.crypto.state=unencrypted
-    stop mobicore
-    stop keymint-trustonic
-    stop gatekeeper-default
-    stop tee-1-1
-
-on property:twrp.all.users.decrypted=true
-    stop mobicore
-    stop keymint-trustonic
-    stop gatekeeper-default
-    stop tee-1-1
 

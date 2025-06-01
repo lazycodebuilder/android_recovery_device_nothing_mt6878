@@ -1,34 +1,30 @@
 on post-fs
+    # Start the service responsible for any pre-symlink logic
     start create_pl_dev
 
-    wait /dev/block/mapper/preloader_raw_a
-    wait /dev/block/mapper/preloader_raw_b
+    # Wait for actual device-mapper block nodes to appear
+    wait /dev/block/mapper/pl_a
+    wait /dev/block/mapper/pl_b
 
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/by-name/preloader_raw_b
+    # Symlinks to standardized names (via pl_a/pl_b)
+    symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
+    symlink /dev/block/mapper/pl_b /dev/block/by-name/preloader_raw_b
 
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/bootdevice/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/bootdevice/by-name/preloader_raw_b
+    symlink /dev/block/mapper/pl_a /dev/block/platform/bootdevice/by-name/preloader_raw_a
+    symlink /dev/block/mapper/pl_b /dev/block/platform/bootdevice/by-name/preloader_raw_b
 
     # FSTAB_RAW2(lk2,bootloader2) of fstab.in.emmc, but without bootloader2 mount point
     symlink /dev/block/by-name/lk1 /dev/block/by-name/bootloader1
     symlink /dev/block/by-name/lk2 /dev/block/by-name/bootloader2
 
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/soc/112b0000.ufshci/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/soc/112b0000.ufshci/by-name/preloader_raw_b
+    # Additional platform-specific symlinks
+    symlink /dev/block/mapper/pl_a /dev/block/platform/soc/112b0000.ufshci/by-name/preloader_raw_a
+    symlink /dev/block/mapper/pl_b /dev/block/platform/soc/112b0000.ufshci/by-name/preloader_raw_b
 
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/112b0000.ufshci/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/112b0000.ufshci/by-name/preloader_raw_b
+    symlink /dev/block/mapper/pl_a /dev/block/platform/112b0000.ufshci/by-name/preloader_raw_a
+    symlink /dev/block/mapper/pl_b /dev/block/platform/112b0000.ufshci/by-name/preloader_raw_b
 
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/11270000.ufshci/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/11270000.ufshci/by-name/preloader_raw_b
-
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/11230000.mmc/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/11230000.mmc/by-name/preloader_raw_b
-
-    symlink /dev/block/mapper/preloader_raw_a /dev/block/platform/11230000.msdc/by-name/preloader_raw_a
-    symlink /dev/block/mapper/preloader_raw_b /dev/block/platform/11230000.msdc/by-name/preloader_raw_b
-
+# Service that may help prepare device-mapper or other early setups
 service create_pl_dev /system/bin/create_pl_dev
     user root
     group root

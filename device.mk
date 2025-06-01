@@ -70,16 +70,6 @@ BOARD_SHIPPING_API_LEVEL := 34
 PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
 # ========================================
-# Boot Control HAL (for A/B)
-# ========================================
-PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-mtkimpl \
-    android.hardware.boot@1.2-mtkimpl.recovery
-
-PRODUCT_PACKAGES_DEBUG += \
-    bootctrl
-
-# ========================================
 # FastbootD Support (used by recovery)
 # ========================================
 PRODUCT_PACKAGES += \
@@ -112,6 +102,15 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
+
+# ========================================
+# Device Modules
+# ========================================
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libion
+
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
 
 # ========================================
 # oem otacerts key
