@@ -171,7 +171,7 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 # ========================================
 TW_LOAD_VENDOR_BOOT_MODULES := true
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
-TW_LOAD_VENDOR_MODULES := bootinfo.ko focaltech_tp.ko
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root/vendor/lib/modules/*.ko)\")
 
 # ========================================
 # AVB (Android Verified Boot)
