@@ -64,9 +64,9 @@ PRODUCT_PACKAGES += \
 # ========================================
 # Android Version & VNDK Configuration
 # ========================================
-BOARD_SHIPPING_API_LEVEL := 34
+BOARD_SHIPPING_API_LEVEL := 32
 
-# Shipping API level (Android 14 = API 34)
+# Shipping API level (Android 12.1 = API 32)
 PRODUCT_SHIPPING_API_LEVEL := $(BOARD_SHIPPING_API_LEVEL)
 
 # ========================================
