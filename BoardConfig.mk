@@ -134,10 +134,20 @@ BOARD_USES_METADATA_PARTITION := true
 # ========================================
 # Encryption / Decryption Support (FBE)
 # ========================================
+
+TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+
+TW_CRYPTO_FS_TYPE := "f2fs"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/by-name/userdata"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt,checkpoint_merge,compress_cache"
+
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_USE_FSCRYPT_POLICY := 2
+TW_FORCE_KEYMASTER_VER := true
 
 # ========================================
 # Anti-Rollback Bypass

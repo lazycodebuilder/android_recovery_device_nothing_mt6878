@@ -82,6 +82,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.system.keystore2
 
+# Encryption support
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.crypto.dm_default_key.options_format.version=2 \
+	ro.crypto.volume.metadata.method=dm-default-key \
+	keymaster_ver=4.1
+
 # ========================================
 # Preloader Update Utility (MediaTek)
 # ========================================

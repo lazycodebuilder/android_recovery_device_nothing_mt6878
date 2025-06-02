@@ -19,27 +19,29 @@ on init
     chmod 0664 /dev/ion
     chown system system /dev/ion
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw:/system/lib64/hw
-    setprop crypto.ready 1
-
-# Normal mode, FBE
-on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
-    mkdir /data/vendor/mcRegistry 0775 system system
-    install_keyring
 
 # We need vold early for metadata encryption
 on early-fs
     start vold
 
+on property:ro.crypto.state=encrypted && property:ro.boot.dynamic_partitions=true
+    setprop crypto.ready 1
+
+on property:ro.crypto.state=encrypted && property:ro.crypto.type=file
+    mkdir /data/vendor/mcRegistry 0775 system system
+    install_keyring
+
 on property:crypto.ready=1 && property:hwservicemanager.ready=true
     start mcDriverDaemon
 
-on property:sys.listeners.registered=true
+on property:sys.listeners.registered=true && property:keymaster_ver=4.1
     start keymint-trustonic
 
-on property:vendor.sys.listeners.registered=true
+on property:vendor.sys.listeners.registered=true && property:keymaster_ver=4.1
     start keymint-trustonic
 
 on property:ro.crypto.type=block && property:ro.crypto.fs_crypto_blkdev=*
+    mkdir /data/vendor/mcRegistry 0775 system system
     setprop crypto.ready 0
     stop mcDriverDaemon
     stop keymint-trustonic
