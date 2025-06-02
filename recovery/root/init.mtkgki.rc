@@ -5,7 +5,6 @@ service insmod_sh /system/bin/init.insmod.sh /system/etc/init.insmod.mt6878.cfg 
     group root system
     disabled
     oneshot
-    critical
     seclabel u:r:recovery:s0
 
 # Backup service in case main service fails
@@ -24,8 +23,8 @@ on early-init
     setprop vendor.recovery.modules.loaded 0
 
     # Create necessary directories
-    mkdir /lib/modules 0755 root root
-    mkdir /system/lib/modules 0755 root root
+    mkdir -p /lib/modules 0755 root root
+    mkdir -p /vendor/lib/modules 0755 root root
 
     # Set up logging
     write /proc/bootprof "modprobe: Load_Module_START"

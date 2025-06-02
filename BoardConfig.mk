@@ -148,6 +148,10 @@ TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_USE_FSCRYPT_POLICY := 2
 TW_FORCE_KEYMASTER_VER := true
+TW_PREPARE_DATA_MEDIA_EARLY := true
+
+# Enables proper handling of /data/media
+RECOVERY_SDCARD_ON_DATA := true
 
 # ========================================
 # Anti-Rollback Bypass
@@ -157,9 +161,6 @@ BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 PLATFORM_VERSION := 99.87.36
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
-
-# Enables proper handling of /data/media
-RECOVERY_SDCARD_ON_DATA := true
 
 # ========================================
 # Wipe Handling / Misc

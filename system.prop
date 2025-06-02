@@ -7,8 +7,6 @@ ro.postinstall.fstab.prefix=/system
 
 ro.boot.product.vendor.sku=mt6878
 ro.vendor.mediatek.platform=MT6878
-ro.boot.hardware=mt6878
-ro.hardware=mt6878
 
 # Gatekeeper HAL
 ro.hardware.gatekeeper=trustonic
