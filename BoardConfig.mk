@@ -88,6 +88,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 115913752576
 
 # Use F2FS for userdata
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Workaround for build errors with ramdisk copying
@@ -109,8 +110,6 @@ TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
-
-BOARD_USES_VENDOR_DLKMIMAGE := true
 
 # ========================================
 # Dynamic Partitions
@@ -134,21 +133,11 @@ BOARD_USES_METADATA_PARTITION := true
 # ========================================
 # Encryption / Decryption Support (FBE)
 # ========================================
-
-TW_INTERNAL_STORAGE_PATH := "/data/media/0"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-
-TW_CRYPTO_FS_TYPE := "f2fs"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/by-name/userdata"
-TW_CRYPTO_MNT_POINT := "/data"
-TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt,checkpoint_merge,compress_cache"
-
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_USE_FSCRYPT_POLICY := 2
 TW_FORCE_KEYMASTER_VER := true
-TW_PREPARE_DATA_MEDIA_EARLY := true
 
 # Enables proper handling of /data/media
 RECOVERY_SDCARD_ON_DATA := true
@@ -165,6 +154,7 @@ PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 # ========================================
 # Wipe Handling / Misc
 # ========================================
+BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_SUPPRESS_SECURE_ERASE := true
 
 # ========================================
@@ -178,19 +168,12 @@ TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/recovery/root
 # AVB (Android Verified Boot)
 # ========================================
 BOARD_AVB_ENABLE := true
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
-
-# Enable AVB for the vendor_boot image
-BOARD_AVB_VENDOR_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_VENDOR_BOOT_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX_LOCATION := 1
 
 # ========================================
 # FSTab
 # ========================================
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
-TW_SKIP_ADDITIONAL_FSTAB := true
+#TW_SKIP_ADDITIONAL_FSTAB := true
 
 # ========================================
 # System Properties
@@ -242,6 +225,8 @@ TW_INCLUDE_REPACKTOOLS := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXCLUDE_LPDUMP := true
 DEXPREOPT_GENERATE_APEX_IMAGE := true
+TW_HAS_MTP := true
+TW_USB_STORAGE := true
 
 # FastbootD
 TW_INCLUDE_FASTBOOTD := true
@@ -254,7 +239,7 @@ TW_STATUS_ICONS_ALIGN := center
 #TW_CUSTOM_CPU_POS := "340"
 #TW_CUSTOM_BATTERY_POS := "790"
 
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file
 
 # ========================================
 # Debug & Logging

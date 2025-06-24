@@ -1,11 +1,6 @@
 import init.mtkgki.rc
 import init.recovery.mtk_decrypt.rc
 
-on fs
-    wait /dev/block/platform/soc/112b0000.ufshci
-    symlink /dev/block/platform/soc/112b0000.ufshci /dev/block/bootdevice
-    symlink /dev/block/platform/soc/112b0000.ufshci/by-name /dev/block/by-name
-
 # Filesystem mounting
 on late-fs
     mount_all /first_stage_ramdisk/fstab.mt6878 --late

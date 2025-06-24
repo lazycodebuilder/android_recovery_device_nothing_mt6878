@@ -70,7 +70,6 @@ PRODUCT_GMS_CLIENTID_BASE := android-nothing
 # Property Overrides
 # ========================================
 
-# Set properties to hide Reflash TWRP and enable passthrough for FUSE
+# Set properties to hide Reflash TWRP
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.twrp.vendor_boot=true \
-    persist.sys.fuse.passthrough.enable=true
+    ro.twrp.vendor_boot=true

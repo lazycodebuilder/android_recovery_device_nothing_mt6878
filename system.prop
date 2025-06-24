@@ -1,7 +1,3 @@
-##
-ro.vendor.mtk_f2fs_enable=1
-ro.vendor.mtk_emmc_support=1
-
 # Fstab (Postinstall Prefix)
 ro.postinstall.fstab.prefix=/system
 

@@ -80,6 +80,7 @@ PRODUCT_PACKAGES += \
 # Keymaster & Keystore Support
 # ========================================
 PRODUCT_PACKAGES += \
+    android.hardware.keymaster@4.1 \
     android.system.keystore2
 
 # Encryption support
@@ -87,6 +88,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.crypto.dm_default_key.options_format.version=2 \
 	ro.crypto.volume.metadata.method=dm-default-key \
 	keymaster_ver=4.1
+
+# Security
+PRODUCT_PACKAGES += \
+    android.hardware.security.keymint \
+    android.hardware.security.secureclock \
+    android.hardware.security.sharedsecret
+
+# Additional configs
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hardware.keymaster@4.1
+
+TARGET_RECOVERY_DEVICE_MODULES += \
+    android.hardware.keymaster@4.1
 
 # ========================================
 # Preloader Update Utility (MediaTek)

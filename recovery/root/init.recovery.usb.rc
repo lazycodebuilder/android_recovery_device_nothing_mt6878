@@ -20,6 +20,10 @@ on init
     setprop sys.usb.ffs.ready 0
     setprop sys.usb.ffs.aio_compat 0
 
+on fs && property:ro.debuggable=0
+    #write /sys/class/udc/11201000.usb0/device/cmode 2
+    start adbd
+
 on fs && property:sys.usb.configfs=1
     mkdir /config/usb_gadget/g1/functions/ffs.sideload
     mkdir /config/usb_gadget/g1/functions/mtp.gs0
