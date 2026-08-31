@@ -1,0 +1,5 @@
+import /init.mtkgki.rc
+import /init.recovery.mtk_decrypt.rc
+
+on boot
+    start health-default
